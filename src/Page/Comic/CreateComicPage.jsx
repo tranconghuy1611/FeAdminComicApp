@@ -19,12 +19,27 @@ export default function CreateComicPage() {
   const [pageLoading, setPageLoading] = useState(isEditMode);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [emotions, setEmotions] = useState([]);
+
 
   const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (isEditMode) loadComic();
   }, [id]);
+  useEffect(() => {
+    fetchEmotions();
+  }, []);
+
+  const fetchEmotions = async () => {
+    try {
+      const res = await axiosClient.get("/api/emotions");
+      setEmotions(res.data);
+    } catch (err) {
+      alert("Không tải được danh sách thể loại");
+    }
+  };
+
 
   const loadComic = async () => {
     try {
@@ -114,14 +129,21 @@ export default function CreateComicPage() {
         {/* Thể loại */}
         <div>
           <label className="block mb-1 text-sm font-medium text-black dark:text-white">Thể loại</label>
-          <select name="emotionId" value={form.emotionId} onChange={handleChange} required
-            className="w-full rounded-md bg-gray-100 dark:bg-[#2A3B4D] px-3 py-2 text-black dark:text-white">
+          <select
+            name="emotionId"
+            value={form.emotionId}
+            onChange={handleChange}
+            required
+            className="w-full rounded-md bg-gray-100 dark:bg-[#2A3B4D] px-3 py-2 text-black dark:text-white"
+          >
             <option value="">-- Chọn thể loại --</option>
-            <option value="1">Buồn</option>
-            <option value="2">Vui</option>
-            <option value="3">Hành động</option>
-            <option value="4">Ngọt ngào</option>
+            {emotions.map((emotion) => (
+              <option key={emotion.id} value={emotion.id}>
+                {emotion.name}
+              </option>
+            ))}
           </select>
+
         </div>
 
         {/* Ảnh bìa */}
