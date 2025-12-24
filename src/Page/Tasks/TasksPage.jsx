@@ -62,17 +62,17 @@ export default function TasksPage() {
     }
   };
 
-  const handleDelete = async () => {
-    try {
-      await deleteTask(currentTask.id); // 👈 Dùng service
-      alert("Xóa nhiệm vụ thành công!");
-      setShowDeleteModal(false);
-      setCurrentTask(null);
-      loadTasks();
-    } catch (err) {
-      alert("Xóa thất bại!");
-    }
-  };
+  // const handleDelete = async () => {
+  //   try {
+  //     await deleteTask(currentTask.id); // 👈 Dùng service
+  //     alert("Xóa nhiệm vụ thành công!");
+  //     setShowDeleteModal(false);
+  //     setCurrentTask(null);
+  //     loadTasks();
+  //   } catch (err) {
+  //     alert("Xóa thất bại!");
+  //   }
+  // };
 
   const openEditModal = (task) => {
     setCurrentTask(task);
@@ -179,13 +179,13 @@ export default function TasksPage() {
                         >
                           <span className="material-symbols-outlined text-xl">edit</span>
                         </button>
-                        <button
+                        {/* <button
                           onClick={() => openDeleteModal(task)}
                           className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-100 text-red-600 hover:bg-red-600 hover:text-white transition-all shadow-sm"
                           title="Xóa"
                         >
                           <span className="material-symbols-outlined text-xl">delete</span>
-                        </button>
+                        </button> */}
                       </div>
                     </td>
                   </tr>
@@ -275,33 +275,6 @@ export default function TasksPage() {
       )}
 
       {/* Modal Xóa */}
-      {showDeleteModal && currentTask && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowDeleteModal(false)} />
-          <div className="relative w-full max-w-md rounded-3xl bg-white dark:bg-[#1A2633] p-8 shadow-2xl">
-            <h2 className="mb-4 text-2xl font-bold text-[#111418] dark:text-white">Xác nhận xóa</h2>
-            <p className="mb-8 text-base text-[#617589] dark:text-[#94A3B8]">
-              Xóa nhiệm vụ <span className="font-bold text-[#111418] dark:text-white">"{currentTask.name}"</span>?
-              <br />
-              <span className="font-semibold text-red-600 dark:text-red-400">Không thể hoàn tác!</span>
-            </p>
-            <div className="flex justify-end gap-4">
-              <button
-                onClick={() => setShowDeleteModal(false)}
-                className="rounded-xl border border-[#dbe0e6] dark:border-[#2A3B4D] px-6 py-3 font-medium hover:bg-gray-100 dark:hover:bg-[#2A3B4D] transition"
-              >
-                Hủy
-              </button>
-              <button
-                onClick={handleDelete}
-                className="rounded-xl bg-gradient-to-r from-red-600 to-red-700 px-7 py-3 font-bold text-white shadow-lg hover:from-red-700 transition"
-              >
-                Xóa Nhiệm Vụ
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

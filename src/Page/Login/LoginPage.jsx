@@ -6,7 +6,7 @@ import {
     EyeIcon,
     EyeSlashIcon,
 } from "@heroicons/react/24/outline";
-import { loginAdmin } from "../../api/authService";
+import { loginAdmin, getMe } from "../../api/authService";
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
@@ -26,28 +26,39 @@ export default function LoginPage() {
         try {
             setLoading(true);
 
-            const res = await loginAdmin({
-                username,
-                password,
-            });
-
-
-            localStorage.setItem("token", res.data.token);
-            localStorage.setItem("user", JSON.stringify(res.data.user));
+            // 1️⃣ Login → lấy token
+            const res = await loginAdmin({ username, password });
 
             if (!res.data?.token) {
                 throw new Error("Không nhận được token");
             }
 
+            localStorage.setItem("token", res.data.token);
+
+            // 2️⃣ Gọi /users/me → lấy role
+            const meRes = await getMe();
+
+            const user = meRes.data;
+            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("role", user.role);
+
+            // 3️⃣ Check role
+            if (user.role !== "ADMIN") {
+                alert("Bạn không có quyền truy cập trang Admin");
+                localStorage.clear();
+                return;
+            }
+
             navigate("/admin");
+
         } catch (err) {
-            alert(
-                err.response?.data?.message || "Đăng nhập thất bại!"
-            );
+            alert(err.response?.data?.message || "Đăng nhập thất bại!");
+            localStorage.clear();
         } finally {
             setLoading(false);
         }
     };
+
 
     return (
         <>

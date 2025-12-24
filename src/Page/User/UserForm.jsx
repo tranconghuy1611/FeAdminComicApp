@@ -43,11 +43,15 @@ export default function UserForm({ user, onSubmit, onCancel }) {
           name="role"
           value={form.role}
           onChange={handleChange}
-          className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+          className={`w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none
+    ${user.role === "ADMIN" ? "bg-gray-200 cursor-not-allowed" : ""}`} // thêm style mờ
+          disabled={user.role === "ADMIN"} // khóa nếu là admin
         >
           <option value="USER">USER</option>
           <option value="ADMIN">ADMIN</option>
         </select>
+
+
       </div>
 
       <div className="flex justify-end gap-3 mt-6">
