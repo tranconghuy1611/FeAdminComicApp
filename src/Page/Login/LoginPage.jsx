@@ -64,27 +64,51 @@ export default function LoginPage() {
         <>
             <div className="min-h-screen flex">
                 {/* Bên trái - Gradient + Logo (ẩn trên mobile) */}
-                <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-black opacity-20"></div>
+                {/* Bên trái - Gradient + Logo + Comic style (ẩn trên mobile) */}
+                <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
+                    {/* Nền gradient mới + comic overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-cyan-500 to-pink-600"></div>
+
+                    {/* Overlay comic effect: radial rays + halftone dots */}
+                    <div className="absolute inset-0 opacity-30">
+                        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-white mix-blend-overlay"></div>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.4)_0%,transparent_50%)]"></div>
+                        <div className="absolute inset-0 bg-repeat bg-[length:8px_8px] opacity-20"
+                            style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)' }}></div>
+                    </div>
+
+                    {/* Dark overlay để text nổi bật hơn */}
+                    <div className="absolute inset-0 bg-black opacity-40"></div>
 
                     <div className="relative z-10 flex flex-col items-center justify-center h-full text-white px-10">
-                        <div className="bg-white bg-opacity-20 rounded-2xl p-6 mb-8">
-                            <BookOpenIcon className="w-16 h-16 text-white" />
+                        {/* Logo lớn với effect */}
+                        <div className="bg-white bg-opacity-25 backdrop-blur-md rounded-3xl p-8 mb-10 shadow-2xl transition-transform duration-500 hover:scale-110">
+                            <BookOpenIcon className="w-24 h-24 text-white drop-shadow-lg" />
                         </div>
 
-                        <h1 className="text-5xl font-bold mb-4 text-center">
+                        <h1 className="text-6xl font-extrabold mb-6 text-center drop-shadow-2xl tracking-tight">
                             Thế Giới Truyện Tranh
                         </h1>
-                        <p className="text-center text-lg opacity-90 max-w-md leading-relaxed">
-                            Hàng vạn chương truyện hấp dẫn, cập nhật mỗi ngày.
+
+                        <p className="text-center text-xl opacity-95 max-w-lg leading-relaxed mb-12 px-8">
+                            Khám phá hàng ngàn bộ manga đỉnh cao, cập nhật liên tục.
                             <br />
-                            Tham gia cộng đồng đam mê ngay hôm nay!
+                            <span className="font-semibold text-yellow-300">Hành trình phiêu lưu bắt đầu từ đây! 💥</span>
                         </p>
 
-                        <div className="mt-12 flex gap-4">
-                            <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
-                            <div className="w-3 h-3 bg-white rounded-full"></div>
-                            <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
+                        {/* Comic dots + small speech bubble effect */}
+                        <div className="flex gap-6 mb-8">
+                            <div className="w-4 h-4 bg-yellow-400 rounded-full animate-pulse"></div>
+                            <div className="w-4 h-4 bg-white rounded-full animate-pulse delay-150"></div>
+                            <div className="w-4 h-4 bg-pink-400 rounded-full animate-pulse delay-300"></div>
+                        </div>
+
+                        {/* Small comic elements */}
+                        <div className="absolute top-20 left-10 text-5xl font-bold rotate-12 opacity-60">
+                            BOOM!
+                        </div>
+                        <div className="absolute bottom-32 right-16 text-4xl font-bold -rotate-12 opacity-50">
+                            POW!
                         </div>
                     </div>
                 </div>

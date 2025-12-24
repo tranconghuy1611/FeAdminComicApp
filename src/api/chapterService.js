@@ -6,7 +6,9 @@ import axiosClient from "./axiosClient";
 export const getChaptersByStoryId = (storyId) => {
   return axiosClient.get("/api/chapters", { params: { storyId } });
 };
-
+export const getAllChapter = () => {
+  return axiosClient.get("/api/chapters");
+};
 export const getChapterById = (id) => {
   return axiosClient.get(`/api/chapters/${id}`);
 };
