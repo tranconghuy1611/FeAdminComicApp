@@ -9,7 +9,7 @@ const menus = [
   { name: "Dashboard", path: "/admin", icon: "dashboard" },
   { name: "Quản lý Truyện", path: "/admin/comics", icon: "book_2", fill: true },
   { name: "Người dùng", path: "/admin/users", icon: "group" },
-  { name: "Báo cáo", path: "/admin/reports", icon: "flag" },
+  { name: "Nhiệm Vụ", path: "/admin/task", icon: "flag" },
   { name: "Cài đặt", path: "/admin/settings", icon: "settings" },
 ];
 
